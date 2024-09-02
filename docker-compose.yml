@@ -8,7 +8,7 @@ services:
     build:
       context: .
       dockerfile: ./.docker/Dockerfile
-      target: dev
+      target: production
       args:
         - gid=1000
         - uid=1000
@@ -19,15 +19,16 @@ services:
       - database
 
   database:
-    image: mariadb:10.6
+    image: mysql:latest
     ports:
       - 3306:3306
     volumes:
       - data:/var/lib/mysql
+      - ./.docker/db/0_init.sql:/docker-entrypoint-initdb.d/0_init.sql
     environment:
-      MARIADB_ROOT_PASSWORD: ${DB_ROOT_USER:-project}
-      MARIADB_USER: ${DB_USER:-project}
-      MARIADB_PASSWORD: ${DB_PASSWORD:-project}
-      MARIADB_DATABASE: ${DB_NAME:-project}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_USER:-root}
+      MYSQL_USER: ${DB_USER:-project}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-project}
+      MYSQL_DATABASE: ${DB_NAME:-project}
 volumes:
     data:

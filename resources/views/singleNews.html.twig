@@ -1,0 +1,14 @@
+<div class="news">
+    <div class="news-title row">
+        {{ singleNews.title }}
+    </div>
+    <div class="news-content row">
+        {{ singleNews.content }}
+    </div>
+    <div class="right row">
+        <img class="icon delete" data-id="{{ singleNews.id }}" data-action="delete" src="/images/close.svg">
+    </div>
+    <div class="right row">
+        <img class="icon edit" data-id="{{ singleNews.id }}" data-action="edit" src="/images/pencil.svg">
+    </div>
+</div>

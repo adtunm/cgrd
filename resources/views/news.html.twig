@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    {% if news|length > 0 %}
+        <div class="title">All News</div>
+        {% for singleNews in news %}
+            {% include 'singleNews.html.twig' %}
+        {% endfor %}
+    {% endif %}
+    <div>
+        <div class="title row" id="news-form">
+            Create News
+        </div>
+        <div class="row right hidden" id="cancel">
+            <img class="icon" id="cancel-icon" src="/images/close.svg">
+        </div>
+        </div>
+    <form method="POST" action="/news/add">
+        <label>
+            <input class="form-title" name="title" id="title" placeholder="Title">
+        </label>
+        <label>
+            <textarea class="form-description" name="content" id="content" placeholder="Description"></textarea>
+        </label>
+        <label>
+            <input class="button" type="submit"  value="Create">
+        </label>
+    </form>
+    <button class="button" id="logout">Logout</button>
+
+{% endblock %}

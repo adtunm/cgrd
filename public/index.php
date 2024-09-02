@@ -1,9 +1,17 @@
 <?php
 
-//check db connection
-//
+use App\Boot;
+use App\Routing\Router;
 
-$request = $_SERVER["REQUEST_URI"];
-var_dump($request);
+require __DIR__ . '/../vendor/autoload.php';
 
-echo 'Hello world';
+ob_start();
+try {
+    Boot::initialize();
+    require __DIR__ . '/../routing/web.php';
+    Router::handleRequest();
+    ob_end_flush();
+} catch (Exception $exception) {
+    ob_end_clean();
+    require __DIR__ . '/error.php';
+}
